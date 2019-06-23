@@ -113,10 +113,38 @@ people.maxBy { it.age }
 - 파이널이 아닌 변수를 포획한 경우에는 변수를 특별한 래퍼로 감싸서 나중에 변경하거나 읽을 수 있게 한 다음, 래퍼에 대한 참조를 람다 코드와 함께 저장한다
 - 비동기적으로 실행되는 코드로 활용하는 경우 함수 호출이 끝난 다음에 로컬 변수가 변경될 수도 있다
 
-
-
-
 5.1.5 멤버 참조
+
+- 함수를 직접 넘길 때
+- 함수를 값으로 바꿀 수 있다
+- 이중 콜론(::)을 사용
+- 멤버 참조는 프로퍼티나 메소드를 단 하나만 호출하는 함수 값을 만들어준다
+
+- Person::age
+- 클래스::멤버
+
+- 최상위 선언된 함수나 프로퍼티를 참조할 수도 있다
+```
+fun salute() = println("Salute!")
+
+run(::salute)
+```
+
+- 생성자 참조를 사용하면 클래스 생성 작업을 연기하거나 저장해둘 수 있다
+ :: 뒤에 클래스 이름을 넣으면 생성자 참조를 만들 수 있다
+
+- Person의 인스턴스를 만드는 동작을 값으로 저장한다
+```
+val createPerson= ::Person
+val p = createPerson("Alice",29)
+println(p)
+```
+
+- 확장 함수도 멤버 함수와 똑같은 방식으로 참조할 수 있다
+```
+fun Person.isAdult() = age >= 21
+val predicate = Person::isAdult
+```
 
 
 */
@@ -152,10 +180,53 @@ fun main() {
     people.maxBy(getAge)
 
     // 맨 마지막 람다의 결과 값
-    val sum2 = { x: Int, y : Int ->
+    val sum2 = { x: Int, y: Int ->
         println("Computing...")
-        x+y
+        x + y
     }
-    println(sum2(1,2))
+    println(sum2(1, 2))
+
+    // 변경 가능한 변수 포획하기
+    val response = listOf("200 OK", "418 I'm a teapot", "500 Internal Server Error")
+    printProblemCounts(response)
+
+    // 멤버 참조
+    people.maxBy(Person::age)
+    people.maxBy { p -> p.age }
+    people.maxBy { it.age }
+
+    // 최상위 멤버 참
+    run(::salute)
+
+    /*val action = { person : Person, message :String ->
+        sendEmail(person,message)
+    }
+
+    val nextAction = ::sendEmail*/
+
+    //생성자 참조
+    val createPerson = ::Person
+    val p = createPerson("Alice", 29)
+    println(p)
+
+    // 확장 함수 참조
+    fun Person.isAdult() = age >= 21
+    val predicate = Person::isAdult
 
 }
+
+fun printProblemCounts(response: Collection<String>) {
+    var clientErrors = 0
+    var serverErrors = 0
+    response.forEach {
+        if (it.startsWith("4")) {
+            clientErrors++
+        } else if (it.startsWith("5")) {
+            serverErrors++
+        }
+    }
+    println("$clientErrors client errors, $serverErrors server errors")
+}
+
+fun salute() = println("Salute!")
+
