@@ -14,6 +14,10 @@ package com.example.kotlinstudyproject.chapter4
 
 
 interface Clickable {
+
+    val str : String
+        get() = "hyejin"
+
     fun click()
     fun showOff() = println("I'm clickable!")
 }
@@ -28,6 +32,8 @@ interface Focusable {
 class Button : Clickable, Focusable {
 
     override fun click() = println("I was clicked!")
+
+
 
     // Clickable과 Focusable의 showOff 중 어느 쪽도 선택되지 않는다
     // 두 상위 인터페이스에 정의된 showOff 구현을 대체할 오버라이딩 메소드를 직접 제공해야 한다
@@ -81,6 +87,9 @@ class PracticeOpenClass : RichButton() {
 
 // 이 클래스는 추상 클래스이다. 이 클래스는 인스턴스를 만들 수 없다
 abstract class Animated {
+
+    constructor()
+
 
     // 이 함수는 추상 함수다. 이 함수에는 구현이 없으며 하위 클래스에서는 이 함수를 반드시 오버라이드 해야한다
     abstract fun animate()

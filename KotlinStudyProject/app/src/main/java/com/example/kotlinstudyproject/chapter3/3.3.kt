@@ -6,7 +6,7 @@ import android.widget.Button
 /* 확장 함수 (extension function)
  - 어떤 클래스의 멤버 메소드인 것처럼 호출할 수 있지만 그 클래스의 밖에 선언된 함수 */
 
-fun String.lastChar(): Char = this.get(this.length - 1)
+fun String.lastChar(): Char = get(this.length - 1)
 fun Int.lastChar(): Int = this.minus(3)
 
 /* 추가하려는 함 수 이름 앞에 그 함수가 확장할 클래스의 이름을 덧붙이기만 하면 된다
@@ -14,6 +14,7 @@ fun Int.lastChar(): Int = this.minus(3)
    - 확장 함수가 호출되는 대상이 되는 값(객체)를 수신 객체 (receiver object)
    수신 객체의 this 는 생략 가능 */
 
+@JvmOverloads
 fun main() {
     println("hyejin".lastChar())
     // 수신 객체 : hyejin , 수신 객체 타입 : String
@@ -36,6 +37,8 @@ fun main() {
 
     fun Button.showOff() = println("I'm a Button!")
 
+
+
     /* 5 확장 프로퍼티
          기존 클래스 객체에 대한 프로퍼티 형식의 구문으로 사용할 수 있는 API를 추가할 수 있다 */
     println("hyejin".lastChar())
@@ -44,6 +47,18 @@ fun main() {
     println(sb)
 
 }
+
+
+fun View.visible(b : Boolean){
+    if(b) this.visibility = View.VISIBLE
+    else this.visibility = View.GONE
+}
+
+/*fun View.visible(b : Boolean){
+    if(b) this.visibility = View.VISIBLE
+    else this.visibility = View.GONE
+}*/
+
 
 // 변경 가능한 확장 프로퍼티 선언하기
 var StringBuilder.lastChar: Char

@@ -1,4 +1,4 @@
-package com.example.kotlinstudyproject
+package com.example.kotlinstudyproject.chapter3
 
 fun main() {
     val list = listOf(1, 2, 3)
@@ -42,6 +42,9 @@ const val UNIX_LINE_SEPARATOR = "\n"
 /*
 * 이 함수는 제네릭하다 : 이 함수는 `어떤 타입의 값`을 원소로 하는 컬렉션이든 처리할 수 있다
 * */
+
+
+@JvmOverloads
 fun <T> joinToString(
     collection: Collection<T>,
     separator: String = ",", // 디폴트 값

@@ -126,5 +126,4 @@ fun main() {
     val subscribingUser = User8.newSubscribingUser("bob@gmail.com")
     println(subscribingUser.nickname)
 
-
 }

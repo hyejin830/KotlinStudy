@@ -33,6 +33,12 @@ class User2 constructor(_nickname: String) {
     }
 }
 
+class User10  {
+
+    init {
+     val string: String = "dd"
+        }
+}
 class User3(_nickname: String) {
     val nickname: String = _nickname
 }

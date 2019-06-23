@@ -18,10 +18,20 @@ package com.example.kotlinstudyproject.chapter3
     - infix 변경자를 함수 선언 앞에 추가
  */
 
+fun test(vararg value: Int){
+
+}
+
 infix fun Any.to(other: Any) = Pair(this, other)
 
 fun main() {
     // 구조 분해 선언
-    val (number, name) = 1 to "One"
+    val (number, name) = 1 to true
+
+    //test(1,2,3)
+
+    val intArray = IntArray(3)
+    intArray.set(1,1)
+    test(*intArray)
 }
 
